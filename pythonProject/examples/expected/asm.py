@@ -2,63 +2,69 @@ import sys
 import os
 import glob
 
-# 1. AJUSTE DE IMPORTACIÓN:
-# Como estamos en 'examples/expected', debemos subir 2 niveles (..)
-# para llegar a la raíz y luego entrar a 'src'.
+
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 
+
 from antlr4 import *
-from src.PythonSubsetLexer import PythonSubsetLexer
-from src.PythonSubsetParser import PythonSubsetParser
-from SemanticVisitor import SemanticVisitor
-from IntermediateCode import IntermediateVisitor
-from Optimizer import Optimizer
-from MIPSGenerator import MIPSGenerator
+
+from PythonSubsetLexer import PythonSubsetLexer
+from PythonSubsetParser import PythonSubsetParser
+
+
+from VisitanteSemantico import VisitanteSemantico
+from CodigoIntermedio import VisitanteIntermedio
+from Optimizador import Optimizador
+from GeneradorMIPS import GeneradorMIPS
 
 
 def compile_file(input_path, output_path):
-    # (Esta función se queda IGUAL, no cambian rutas internas)
     print(f"Compilando {os.path.basename(input_path)} -> {os.path.basename(output_path)}...")
 
     try:
+        # A. ANTLR
         input_stream = FileStream(input_path, encoding='utf-8')
         lexer = PythonSubsetLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = PythonSubsetParser(stream)
         tree = parser.program()
 
-        semantic = SemanticVisitor()
-        semantic.visit(tree)
 
-        intermediate = IntermediateVisitor()
-        intermediate.visit(tree)
+        semantico = VisitanteSemantico()
+        semantico.visit(tree)
 
-        optimizer = Optimizer()
-        quads = optimizer.optimize(intermediate.quadruples)
 
-        mips = MIPSGenerator()
-        mips.generate(quads, output_path)
+        intermedio = VisitanteIntermedio()
+        intermedio.visit(tree)
 
-        print("✅ Generado con éxito.")
+
+        optimizador = Optimizador()
+
+        cuadruplos = optimizador.optimizar(intermedio.cuadruplos)
+
+
+        mips = GeneradorMIPS()
+
+        mips.generar(cuadruplos, output_path)
+
+        print(" Generado con éxito.")
 
     except Exception as e:
         print(f"❌ Error al compilar: {e}")
 
 
 def main():
-    # base_dir ahora es: .../proyecto/examples/expected
+    # Directorio actual (examples/expected)
     base_dir = os.path.dirname(__file__)
 
-    # 2. AJUSTE DE RUTAS DE ENTRADA/SALIDA:
-
-    # La carpeta 'valid' está en el directorio hermano (subir uno y entrar a valid)
+    # Directorio de entrada (examples/valid)
     valid_dir = os.path.join(base_dir, '..', 'valid')
 
-    # La carpeta 'expected' es DONDE ESTAMOS AHORA MISMO
+    # Directorio de salida (el actual)
     expected_dir = base_dir
 
-    # Buscar todos los .txt en valid
-    # (os.path.abspath ayuda a limpiar la ruta visualmente si hay muchos "..")
+    # Buscar archivos .txt
     input_files = glob.glob(os.path.abspath(os.path.join(valid_dir, '*.txt')))
 
     if not input_files:
@@ -68,15 +74,14 @@ def main():
     print(f"=== Generando {len(input_files)} archivos ASM en carpeta actual ===\n")
 
     for input_file in input_files:
+        # Calcular nombre de salida
         filename = os.path.basename(input_file)
         name_without_ext = os.path.splitext(filename)[0]
-
-        # Guardamos directamente en la carpeta actual (expected_dir)
         output_file = os.path.join(expected_dir, name_without_ext + ".asm")
 
         compile_file(input_file, output_file)
 
-    print("\n=== ¡Listo! Archivos generados en esta carpeta. ===")
+    print("\n=== ¡Listo! Revisa los archivos .asm generados. ===")
 
 
 if __name__ == '__main__':

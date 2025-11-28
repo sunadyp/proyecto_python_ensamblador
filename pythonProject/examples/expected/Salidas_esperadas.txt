@@ -1,0 +1,25 @@
+Prueba 1
+100
+
+prueba 2
+10
+
+Prueba 3
+110
+150
+
+Prueba 4
+60
+
+Prueba 5
+120
+
+Prueba 6
+10
+55
+
+Prueba 7
+Inicio del programa
+El numero es mayor a 5
+10
+Fin del programa
