@@ -1,4 +1,3 @@
-
 PYTHON = python
 
 ANTLR_JAR = lib/antlr-4.13.1-complete.jar
