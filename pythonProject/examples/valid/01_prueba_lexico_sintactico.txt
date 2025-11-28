@@ -1,0 +1,14 @@
+# PRUEBA 1: Lexico y Sintactico
+# El compilador debe ignorar estos comentarios.
+# Debe reconocer palabras clave: def, if, else, print
+
+def funcion_vacia() {
+    # Bloque vacio valido
+}
+
+x = 100
+if x > 0 : {
+    print(x)
+} else : {
+    print(0)
+}

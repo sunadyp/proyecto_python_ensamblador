@@ -1,0 +1,8 @@
+
+def calcular() {
+    secreto = 999
+}
+
+# La variable 'secreto' murio al terminar la funcion.
+# No debe ser visible aqui.
+print(secreto)

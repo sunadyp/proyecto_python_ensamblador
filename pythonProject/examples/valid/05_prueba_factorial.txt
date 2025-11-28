@@ -1,0 +1,12 @@
+# Calcularemos 5! (Factorial de 5)
+
+numero = 5
+res = 1
+
+while numero > 1 : {
+    res = res * numero
+    numero = numero - 1
+}
+
+# Deberia imprimir 120
+print(res)

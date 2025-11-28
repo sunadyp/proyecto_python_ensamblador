@@ -1,0 +1,7 @@
+# ERROR SEMANTICO 1
+x = 100
+
+# 'z' no ha sido definida en la tabla de simbolos
+resultado = x + z
+
+print(resultado)

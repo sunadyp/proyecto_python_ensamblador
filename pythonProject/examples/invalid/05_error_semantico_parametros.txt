@@ -1,0 +1,9 @@
+# ERROR SEMANTICO DE USO
+def suma(a, b) {
+    return a + b
+}
+
+# 'suma' es una FUNCION, no una variable entera.
+# Dependiendo de tu logica, esto podria fallar o intentar sumar la direccion de memoria.
+# Lo ideal es que falle si no la llamas con ().
+x = 10 + suma

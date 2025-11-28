@@ -1,0 +1,19 @@
+# EJEMPLO COMPLETO 2: Sumatoria
+# Suma de los numeros del 1 al 10
+
+total = 0
+contador = 1
+limite = 11
+
+while contador < limite : {
+    total = total + contador
+    contador = contador + 1
+
+    # Imprimimos pasos intermedios para ver que funciona
+    if contador == 5 : {
+        print(total) # Deberia ser 1+2+3+4 = 10
+    }
+}
+
+# Resultado final esperado: 55
+print(total)

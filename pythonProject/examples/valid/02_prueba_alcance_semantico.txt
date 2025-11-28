@@ -1,0 +1,13 @@
+# PRUEBA 2: Semantico
+# 'a' global
+a = 10
+
+def prueba(x) {
+    # 'a' local (parametro o variable interna)
+    # Esto NO debe chocar con la 'a' global
+    a = 5
+    print(a)
+}
+
+# Aqui debe imprimir la 'a' global (10)
+print(a)

@@ -1,0 +1,9 @@
+# PRUEBA 4: Optimizacion
+# El usuario escribio una operacion larga con constantes
+# El compilador NO debe generar instrucciones ADD/MUL para esto en MIPS
+# Debe calcular 10+20=30, luego 30*2=60.
+
+resultado = (10 + 20) * 2
+
+# En el ASM final, deberia verse simplemente: li $t0, 60
+print(resultado)

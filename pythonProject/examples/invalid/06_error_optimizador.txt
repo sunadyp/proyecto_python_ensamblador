@@ -1,0 +1,7 @@
+# ERROR EN OPTIMIZACION
+# El optimizador intentara hacer "Constant Folding" aqui.
+# Al intentar dividir 20 / 0, Python lanzara excepcion.
+
+x = 20 / 0
+
+print(x)

@@ -1,0 +1,7 @@
+# ERROR SINTACTICO
+x = 10
+
+# Falta el ':' despues de la condicion
+if x > 5 {
+    print(x)
+}

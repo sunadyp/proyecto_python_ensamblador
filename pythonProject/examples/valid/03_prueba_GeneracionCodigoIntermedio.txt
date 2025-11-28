@@ -1,0 +1,13 @@
+# PRUEBA 3: Generacion de Cuadruplos
+a = 10
+b = 20
+c = 5
+
+# Sin parentesis: Primero b*c (100), luego + a (110)
+res1 = a + b * c
+
+# Con parentesis: Primero a+b (30), luego * c (150)
+res2 = (a + b) * c
+
+print(res1)
+print(res2)

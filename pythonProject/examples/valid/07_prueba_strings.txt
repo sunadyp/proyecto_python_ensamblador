@@ -1,0 +1,9 @@
+print("Inicio del programa")
+
+x = 10
+if x > 5 : {
+    print("El numero es mayor a 5")
+    print(x)
+}
+
+print("Fin del programa")
